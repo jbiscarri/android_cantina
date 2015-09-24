@@ -106,6 +106,10 @@ public class PlateFragment extends Fragment{
                     @Override
                     public void onClick(View v) {
                         //Show dialog
+                        AddPlateDialogFragment dialog = new AddPlateDialogFragment();
+                        //dialog.setOnCityAddedListener(this);
+                        dialog.show(getFragmentManager(), null);
+
                     }
                 });
             }

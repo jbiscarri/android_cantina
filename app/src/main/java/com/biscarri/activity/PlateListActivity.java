@@ -22,6 +22,5 @@ public class PlateListActivity extends AppCompatActivity {
                     .add(R.id.fragment_plate_list, PlateFragment.newInstance())
                     .commit();
         }
-
     }
 }
