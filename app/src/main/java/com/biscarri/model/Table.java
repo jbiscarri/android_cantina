@@ -1,11 +1,13 @@
 package com.biscarri.model;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
 /**
  * Created by joanbiscarri on 20/09/15.
  */
-public class Table implements Serializable{
+public class Table implements Serializable, Comparable<Table>{
     private int mIdentifier;
     private String mTableName;
     private Order mOrder;
@@ -43,5 +45,10 @@ public class Table implements Serializable{
     @Override
     public String toString() {
         return getTableName();
+    }
+
+    @Override
+    public int compareTo(@NonNull Table another) {
+        return getTableName().compareToIgnoreCase(another.getTableName());
     }
 }

@@ -1,8 +1,10 @@
 package com.biscarri.fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +12,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.biscarri.activity.PlateListActivity;
 import com.biscarri.cantina.R;
-import com.biscarri.model.Order;
 import com.biscarri.model.OrderElement;
-import com.biscarri.model.Plate;
 import com.biscarri.model.Table;
-
-import java.util.List;
 
 /**
  * Created by joanbiscarri on 20/09/15.
@@ -36,8 +35,7 @@ public class TableFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int initialTableIndex = getActivity().getIntent().getIntExtra(EXTRA_TABLE_INDEX, 0);
-
+       // int initialTableIndex = getActivity().getIntent().getIntExtra(EXTRA_TABLE_INDEX, 0);
     }
 
     @Nullable
@@ -55,6 +53,17 @@ public class TableFragment extends Fragment {
                     android.R.layout.simple_list_item_1, // Layout de cada fila
                     mTable.getOrder().getOrderElementList());
             list.setAdapter(adapter);
+
+            // Obtenemos la referencia al FAB para decirle qué pasa si lo pulsan
+            FloatingActionButton addOrderElementButton = (FloatingActionButton) root.findViewById(R.id.add_order_element_button);
+            if (addOrderElementButton != null)
+                addOrderElementButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity(), PlateListActivity.class);
+                        getActivity().startActivity(intent);
+                    }
+                });
         }
         return root;
     }
@@ -62,4 +71,5 @@ public class TableFragment extends Fragment {
     public void setTable(Table table) {
         mTable = table;
     }
+
 }

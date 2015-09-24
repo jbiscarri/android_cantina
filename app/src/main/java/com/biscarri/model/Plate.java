@@ -1,11 +1,13 @@
 package com.biscarri.model;
 
+import android.support.annotation.NonNull;
+
 import java.util.List;
 
 /**
  * Created by joanbiscarri on 17/09/15.
  */
-public class Plate {
+public class Plate implements Comparable<Plate> {
     private String mName;
     private String mImage;
     private float mPrice;
@@ -49,4 +51,10 @@ public class Plate {
     public void setAllergenList(List<Allergen> allergenList) {
         mAllergenList = allergenList;
     }
+
+    @Override
+    public int compareTo(@NonNull Plate another) {
+        return getName().compareToIgnoreCase(another.getName());
+    }
+
 }

@@ -1,9 +1,11 @@
 package com.biscarri.model;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by joanbiscarri on 17/09/15.
  */
-public class Allergen {
+public class Allergen implements Comparable<Allergen>{
     private String mName;
     private String mImage;
 
@@ -26,5 +28,10 @@ public class Allergen {
 
     public void setImage(String image) {
         mImage = image;
+    }
+    
+    @Override
+    public int compareTo(@NonNull Allergen another) {
+        return getName().compareToIgnoreCase(another.getName());
     }
 }

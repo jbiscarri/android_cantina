@@ -1,9 +1,11 @@
 package com.biscarri.model;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by joanbiscarri on 20/09/15.
  */
-public class OrderElement {
+public class OrderElement implements Comparable<OrderElement>{
     private String mIdentifier;
     private Table mTable;
     private Plate mPlate;
@@ -50,5 +52,10 @@ public class OrderElement {
     @Override
     public String toString() {
         return getPlate().getName();
+    }
+
+    @Override
+    public int compareTo(@NonNull OrderElement another) {
+        return getPlate().getName().compareToIgnoreCase(another.getPlate().getName());
     }
 }
