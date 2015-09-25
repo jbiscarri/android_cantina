@@ -2,10 +2,12 @@ package com.biscarri.model;
 
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
+
 /**
  * Created by joanbiscarri on 20/09/15.
  */
-public class OrderElement implements Comparable<OrderElement>{
+public class OrderElement implements Serializable, Comparable<OrderElement>{
     private String mIdentifier;
     private Table mTable;
     private Plate mPlate;

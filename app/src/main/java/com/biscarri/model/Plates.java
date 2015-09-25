@@ -28,7 +28,10 @@ public class Plates {
         mPlates = new LinkedList<>();
         //TODO select allergens
 
-        //mPlates.add(new Plate(1, "Hamburger", "hamburger01", 12.50f, null, "A description"));
+        mPlates.add(new Plate(1, "Hamburger", "hamburger", 12.50f, null, "A description"));
+        mPlates.add(new Plate(2, "Paella", "paella", 12.50f, null, "A description"));
+        mPlates.add(new Plate(3, "Chips", "chips", 12.50f, null, "A description"));
+
     }
 
     public List<Plate> getPlates() {

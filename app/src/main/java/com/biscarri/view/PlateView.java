@@ -58,8 +58,11 @@ public class PlateView extends android.support.v7.widget.CardView {
         return mPlate;
     }
 
-    public void setPlate(Plate plate) {
+    public void setPlate(Plate plate, Context context) {
         mPlate = plate;
+        int imageId = context.getResources().getIdentifier(plate.getImage(), "drawable", context.getPackageName());
+        mPlateImage.setImageResource(imageId);
+
         mPlateName.setText(mPlate.getName());
     }
 }

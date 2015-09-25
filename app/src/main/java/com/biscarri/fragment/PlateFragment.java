@@ -114,7 +114,7 @@ public class PlateFragment extends Fragment {
 
             // Asocio el modelo con ViewHolder
             public void bindPlate(final Plate plate) {
-                mPlateView.setPlate(plate);
+                mPlateView.setPlate(plate, getActivity());
                 mPlateView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

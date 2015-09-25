@@ -1,12 +1,13 @@
 package com.biscarri.model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by joanbiscarri on 20/09/15.
  */
-public class Order {
+public class Order implements Serializable {
     private List<OrderElement> mOrderElementList;
     private Table mTable;
 

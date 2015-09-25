@@ -2,10 +2,12 @@ package com.biscarri.model;
 
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
+
 /**
  * Created by joanbiscarri on 17/09/15.
  */
-public class Allergen implements Comparable<Allergen>{
+public class Allergen implements Serializable, Comparable<Allergen>{
     private String mName;
     private String mImage;
 

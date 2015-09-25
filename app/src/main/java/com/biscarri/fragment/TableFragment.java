@@ -11,6 +11,9 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -31,6 +34,8 @@ import com.biscarri.model.Table;
 public class TableFragment extends Fragment {
     public static final String EXTRA_TABLE_INDEX =
             "com.biscarri.activity.TableFragment.EXTRA_TABLE_INDEX";
+    private static final String ARG_TABLE = "TABLE";
+
 
     private Table mTable;
     private ElementOrderBroadcastReceiver mBroadcastReceiver;
@@ -44,7 +49,7 @@ public class TableFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // int initialTableIndex = getActivity().getIntent().getIntExtra(EXTRA_TABLE_INDEX, 0);
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -52,6 +57,9 @@ public class TableFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View root = inflater.inflate(R.layout.fragment_table, container, false);
+        if (mTable == null)
+            mTable = (Table) getArguments().getSerializable(ARG_TABLE);
+
         if (mTable != null) {
             TextView tableName = (TextView) root.findViewById(R.id.table_name);
             tableName.setText(mTable.getTableName());
@@ -121,7 +129,29 @@ public class TableFragment extends Fragment {
 
     public void setTable(Table table) {
         mTable = table;
+        Bundle arguments = new Bundle();
+        arguments.putSerializable(ARG_TABLE, table);
+        this.setArguments(arguments);
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_order, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_bill) {
+            //Intent settingsIntent = new Intent(getActivity(), SettingsActivity.class);
+            //startActivity(settingsIntent);
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
     private class ElementOrderBroadcastReceiver extends BroadcastReceiver {

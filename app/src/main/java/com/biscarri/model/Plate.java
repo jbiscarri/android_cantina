@@ -2,12 +2,13 @@ package com.biscarri.model;
 
 import android.support.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by joanbiscarri on 17/09/15.
  */
-public class Plate implements Comparable<Plate> {
+public class Plate implements Serializable, Comparable<Plate> {
     private int mPlateId;
     private String mName;
     private String mImage;
