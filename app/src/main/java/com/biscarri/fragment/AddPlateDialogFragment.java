@@ -11,6 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.biscarri.cantina.R;
+import com.biscarri.model.Plate;
+
+import java.lang.ref.WeakReference;
 
 /**
  * Created by joanbiscarri on 24/09/15.
@@ -19,6 +22,9 @@ public class AddPlateDialogFragment extends DialogFragment {
 
     protected TextInputLayout mTextInputLayout;
     protected EditText mComment;
+    protected WeakReference<AddPlateDialogListener> mAddPlateDialogListener;
+    protected Plate mPlate;
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -45,11 +51,10 @@ public class AddPlateDialogFragment extends DialogFragment {
             positiveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mComment.getText().toString().trim().length() == 0) {
-                        //empty text
-                    }else{
-                        //
+                    if (mAddPlateDialogListener != null && mAddPlateDialogListener.get() != null) {
+                        mAddPlateDialogListener.get().onPlateAddedListener(AddPlateDialogFragment.this, mPlate, mComment.getText().toString());
                     }
+                    dialog.dismiss();
                 }
             });
 
@@ -57,9 +62,24 @@ public class AddPlateDialogFragment extends DialogFragment {
             negativeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    dialog.dismiss();
                 }
             });
         }
     }
+
+    public void setPlate(Plate plate) {
+        mPlate = plate;
+        //TODO set plate data
+    }
+
+    public void setAddPlateDialogListener(AddPlateDialogListener addPlateDialogListener) {
+        mAddPlateDialogListener = new WeakReference<>(addPlateDialogListener);
+    }
+
+    public interface AddPlateDialogListener {
+        void onPlateAddedListener(AddPlateDialogFragment dialog, Plate plate, String comment);
+    }
+
+
 }

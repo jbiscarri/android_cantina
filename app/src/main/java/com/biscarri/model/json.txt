@@ -1,0 +1,49 @@
+"plates": [
+    {
+        "id": 0,
+        "name": "Hamburger",
+        "price": 10.30,
+        "image": "hamburger";
+        "description": "Apetitosa hamburguesa";        
+        "allergens": [
+            1,
+            2
+            ]
+    },
+    {
+        "id": 1,
+        "name": "Chips",
+        "price": 3.50,
+        "image": "chips";
+        "description": "Patatas fritas";        
+        "allergens": [
+            2            
+            ]
+    },
+    {
+        "id": 2,
+        "name": "Paella",
+        "price": 35.50,
+        "image": "paella";
+        "description": "Paella valenciana";        
+        "allergens": [
+            1            
+            ]
+    },
+    {
+        "id": 3,
+        "name": "Coca-cola",
+        "price": 2.50,
+        "image": "coke";
+        "description": "Coca-cola con hielo";        
+        "allergens": [1,2,3]
+    },
+    {
+        "id": 4,
+        "name": "Agua",
+        "price": 2.50,
+        "image": "water";
+        "description": "Still water";        
+        "allergens": []
+    },
+]

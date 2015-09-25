@@ -1,6 +1,12 @@
 package com.biscarri.fragment;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -9,20 +15,34 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 
 import com.biscarri.cantina.R;
+import com.biscarri.model.OrderElement;
 import com.biscarri.model.Plate;
+import com.biscarri.model.Plates;
 import com.biscarri.view.PlateView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.ref.WeakReference;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Created by joanbiscarri on 20/09/15.
  */
-public class PlateFragment extends Fragment{
+public class PlateFragment extends Fragment {
     private RecyclerView mPlateRecicler;
-    private List<Plate> mPlateList;
+    private PlateAdapter mPlateAdapter;
+    private ProgressBar mProgressBar;
+    private PlatesBroadcastReceiver mBroadcastReceiver;
 
     public static PlateFragment newInstance() {
         return new PlateFragment();
@@ -31,6 +51,7 @@ public class PlateFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Nullable
@@ -40,37 +61,26 @@ public class PlateFragment extends Fragment{
 
         View root = inflater.inflate(R.layout.fragment_plate, container, false);
 
-        Plate p = new Plate("Plate1", null, 30.9f, null);
-        Plate p2 = new Plate("Plate2", null, 30.9f, null);
-        Plate p3 = new Plate("Plate3", null, 30.9f, null);
-
-        LinkedList<Plate> plates  = new LinkedList<Plate>();
-        plates.add(p);
-        plates.add(p2);
-        plates.add(p3);
-        setPlateList(plates);
-
+        mProgressBar = (ProgressBar) root.findViewById(R.id.progress);
         mPlateRecicler = (RecyclerView) root.findViewById(R.id.plates);
         mPlateRecicler.setLayoutManager(new LinearLayoutManager(getActivity()));
         mPlateRecicler.setItemAnimator(new DefaultItemAnimator());
-        mPlateRecicler.setAdapter(new PlateAdapter(mPlateList));
+        mPlateAdapter = new PlateAdapter();
+        mPlateRecicler.setAdapter(mPlateAdapter);
+
+        mBroadcastReceiver = new PlatesBroadcastReceiver(mPlateAdapter);
+        // Me suscribo a notificaciones broadcast
+        getActivity().registerReceiver(
+                mBroadcastReceiver,
+                new IntentFilter(Plates.PLATES_UPDATED));
 
         return root;
     }
 
-    public void setPlateList(List<Plate> plateList) {
-        mPlateList = plateList;
-    }
-
-
-
-
     protected class PlateAdapter extends RecyclerView.Adapter<PlateAdapter.PlateViewHolder> {
-        private List<Plate> mPlateList;
 
-        public PlateAdapter(List<Plate> plates) {
+        public PlateAdapter() {
             super();
-            mPlateList = plates;
         }
 
         @Override
@@ -80,19 +90,22 @@ public class PlateFragment extends Fragment{
 
         @Override
         public void onBindViewHolder(PlateViewHolder holder, int position) {
-            Plate currentPlate = mPlateList.get(position);
+            Plate currentPlate = Plates.getInstance().getPlates().get(position);
             holder.bindPlate(currentPlate);
         }
 
         @Override
         public int getItemCount() {
-            return mPlateList.size();
+            int plates = Plates.getInstance().getPlates().size();
+            if (plates > 0){
+                mProgressBar.setVisibility(View.GONE);
+            }
+            return Plates.getInstance().getPlates().size();
         }
 
         // ViewHolder que maneja una vista
         protected class PlateViewHolder extends RecyclerView.ViewHolder {
             private PlateView mPlateView;
-
 
             public PlateViewHolder(View itemView) {
                 super(itemView);
@@ -102,12 +115,13 @@ public class PlateFragment extends Fragment{
             // Asocio el modelo con ViewHolder
             public void bindPlate(final Plate plate) {
                 mPlateView.setPlate(plate);
-                mPlateView.setOnClickListener(new View.OnClickListener(){
+                mPlateView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         //Show dialog
                         AddPlateDialogFragment dialog = new AddPlateDialogFragment();
-                        //dialog.setOnCityAddedListener(this);
+                        dialog.setPlate(plate);
+                        dialog.setAddPlateDialogListener((AddPlateDialogFragment.AddPlateDialogListener) getActivity());
                         dialog.show(getFragmentManager(), null);
 
                     }
@@ -115,4 +129,20 @@ public class PlateFragment extends Fragment{
             }
         }
     }
+
+    private class PlatesBroadcastReceiver extends BroadcastReceiver {
+        private PlateAdapter mAdapter;
+
+        // Necesito el adapter al que voy a avisar de que hay nuevos datos
+        public PlatesBroadcastReceiver(PlateAdapter adapter) {
+            super();
+            mAdapter = adapter;
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
 }

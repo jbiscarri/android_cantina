@@ -35,4 +35,16 @@ public class Order {
     public void setTable(Table table) {
         mTable = table;
     }
+
+    public void addOrderElement(OrderElement orderElement) {
+            mOrderElementList.add(orderElement);
+    }
+
+    public void removeOrderElement(OrderElement orderElement) {
+        mOrderElementList.remove(orderElement);
+    }
+
+    public void removeOrderElementAtPosition(int position) {
+        mOrderElementList.remove(position);
+    }
 }

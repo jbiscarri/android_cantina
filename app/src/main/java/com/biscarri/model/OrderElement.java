@@ -10,6 +10,7 @@ public class OrderElement implements Comparable<OrderElement>{
     private Table mTable;
     private Plate mPlate;
     private String mComment;
+    public static final String ADD_NEW_ELEMENT_ORDER = "com.biscarri.cantina.model.OrderElemt.ADD_NEW_ELEMENT_ORDER";
 
     public OrderElement(Table table, Plate plate, String comment) {
         mTable = table;
@@ -51,7 +52,10 @@ public class OrderElement implements Comparable<OrderElement>{
 
     @Override
     public String toString() {
-        return getPlate().getName();
+        String toStringValue = getPlate().getName() + "(" + getPlate().getPrice() + "$)";
+        if (getComment().length() > 0)
+            toStringValue =  toStringValue + " - " +getComment();
+        return toStringValue;
     }
 
     @Override
