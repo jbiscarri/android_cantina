@@ -8,12 +8,22 @@ import java.io.Serializable;
  * Created by joanbiscarri on 17/09/15.
  */
 public class Allergen implements Serializable, Comparable<Allergen>{
+    private int mId;
     private String mName;
     private String mImage;
 
-    public Allergen(String name, String image) {
+    public Allergen(int id, String name, String image) {
+        mId = id;
         mName = name;
         mImage = image;
+    }
+
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int id) {
+        mId = id;
     }
 
     public String getName() {

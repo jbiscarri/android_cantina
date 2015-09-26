@@ -2,4 +2,5 @@
     <string name="app_name">Cantina</string>
     <string name="action_settings">Settings</string>
     <string name="plate_name">plate name</string>
+    <string name="allergen_demo_text">Gluten</string>
 </resources>

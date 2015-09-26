@@ -2,14 +2,18 @@ package com.biscarri.fragment;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.biscarri.AllergensAdapter;
 import com.biscarri.cantina.R;
 import com.biscarri.model.Plate;
 
@@ -24,6 +28,12 @@ public class AddPlateDialogFragment extends DialogFragment {
     protected EditText mComment;
     protected WeakReference<AddPlateDialogListener> mAddPlateDialogListener;
     protected Plate mPlate;
+    private ImageView mPlateImage;
+    private ListView mAllergens;
+    private TextView mPrice;
+    private TextView mPlateName;
+    private TextView mPlateDescription;
+
 
 
     @Override
@@ -39,6 +49,11 @@ public class AddPlateDialogFragment extends DialogFragment {
 
         mTextInputLayout = (TextInputLayout) dialogView.findViewById(R.id.text_input_layout);
         mComment = (EditText) dialogView.findViewById(R.id.textDialog);
+        mAllergens = (ListView) dialogView.findViewById(R.id.allergens_list);
+        mPlateName = (TextView) dialogView.findViewById(R.id.plate_name);
+        mPlateImage = (ImageView) dialogView.findViewById(R.id.plateImageView);
+        mPrice = (TextView) dialogView.findViewById(R.id.price);
+        mPlateDescription = (TextView) dialogView.findViewById(R.id.description);
         return dialog.create();
     }
 
@@ -66,11 +81,24 @@ public class AddPlateDialogFragment extends DialogFragment {
                 }
             });
         }
+
+        Context context = getActivity();
+        int imageId = context.getResources().getIdentifier(mPlate.getImage(), "drawable", context.getPackageName());
+        mPlateImage.setImageResource(imageId);
+        mPlateName.setText(mPlate.getName());
+        mPrice.setText(mPlate.getPrice() + "$");
+        mPlateDescription.setText(mPlate.getDescription());
+
+
+        final AllergensAdapter adapter = new AllergensAdapter(context,
+                mPlate.getAllergenList());
+        mAllergens.setAdapter(adapter);
+
     }
 
     public void setPlate(Plate plate) {
         mPlate = plate;
-        //TODO set plate data
+
     }
 
     public void setAddPlateDialogListener(AddPlateDialogListener addPlateDialogListener) {

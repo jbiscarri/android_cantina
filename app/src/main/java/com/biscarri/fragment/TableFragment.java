@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.biscarri.activity.BillActivity;
 import com.biscarri.activity.PlateListActivity;
 import com.biscarri.cantina.R;
 import com.biscarri.model.OrderElement;
@@ -40,7 +41,6 @@ public class TableFragment extends Fragment {
     private Table mTable;
     private ElementOrderBroadcastReceiver mBroadcastReceiver;
 
-    //TODO pass selected table to controller
 
     public static TableFragment newInstance() {
         return new TableFragment();
@@ -143,8 +143,11 @@ public class TableFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_bill) {
-            //Intent settingsIntent = new Intent(getActivity(), SettingsActivity.class);
-            //startActivity(settingsIntent);
+            Intent billActivityIntent = new Intent(getActivity(), BillActivity.class);
+            Bundle b = new Bundle();
+            b.putSerializable(BillActivity.ARG_TABLE_BILL, mTable); //Your id
+            billActivityIntent.putExtras(b); //Put your id to your next Intent
+            startActivity(billActivityIntent);
 
             return true;
         }

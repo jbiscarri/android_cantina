@@ -54,7 +54,7 @@ public class OrderElement implements Serializable, Comparable<OrderElement>{
 
     @Override
     public String toString() {
-        String toStringValue = getPlate().getName() + "(" + getPlate().getPrice() + "$)";
+        String toStringValue = getPlate().getName() + " (" + getPlate().getPrice() + "$)";
         if (getComment().length() > 0)
             toStringValue =  toStringValue + " - " +getComment();
         return toStringValue;

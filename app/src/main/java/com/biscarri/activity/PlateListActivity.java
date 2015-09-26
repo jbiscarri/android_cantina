@@ -12,6 +12,8 @@ import android.widget.ProgressBar;
 import com.biscarri.cantina.R;
 import com.biscarri.fragment.AddPlateDialogFragment;
 import com.biscarri.fragment.PlateFragment;
+import com.biscarri.model.Allergen;
+import com.biscarri.model.Allergens;
 import com.biscarri.model.OrderElement;
 import com.biscarri.model.Plate;
 import com.biscarri.model.Plates;
@@ -125,9 +127,15 @@ public class PlateListActivity extends AppCompatActivity  implements AddPlateDia
                     String image = plateJSON.getString("image");
                     float price = (float) plateJSON.getDouble("price");
                     String description = plateJSON.getString("description");
-                    JSONArray list = plateJSON.getJSONArray("allergens");
-                    //TODO create Allergen list
-                    Plate plate = new Plate(id, name, image, price, null, description);
+                    JSONArray allergensList = plateJSON.getJSONArray("allergens");
+                    Allergens allergens = Allergens.getInstance();
+                    List<Allergen> plateAllergens = new LinkedList<>();
+                    for (int j = 0; j < allergensList.length(); j++) {
+                        int allergenId = (int) allergensList.get(j);
+                        plateAllergens.add(allergens.getAllergenWithId(allergenId));
+                    }
+
+                    Plate plate = new Plate(id, name, image, price, plateAllergens, description);
                     plates.add(plate);
                 }
             } catch (Exception e) {

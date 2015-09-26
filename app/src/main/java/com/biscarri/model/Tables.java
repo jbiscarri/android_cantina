@@ -22,6 +22,9 @@ public class Tables {
         mTables.add(new Table(2, "Table 2"));
         mTables.add(new Table(3, "Table 3"));
         mTables.add(new Table(4, "Table 4"));
+        mTables.add(new Table(5, "Table 5"));
+        mTables.add(new Table(6, "Table 6"));
+
     }
 
     public List<Table> getTables() {

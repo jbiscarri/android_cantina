@@ -16,9 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.biscarri.activity.PlateListActivity"
-            >
+        <activity android:name="com.biscarri.activity.PlateListActivity">
+        </activity>
+        <activity android:name="com.biscarri.activity.BillActivity">
         </activity>
     </application>
 

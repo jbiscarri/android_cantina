@@ -16,15 +16,15 @@
         android:background="?android:attr/selectableItemBackground">
 
         <ImageView
-            app:layout_widthPercent="30%"
+            app:layout_widthPercent="50%"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="200dp"
             android:id="@+id/plateImageView"
             android:src="@drawable/hamburger"
             />
 
         <LinearLayout
-            app:layout_widthPercent="70%"
+            app:layout_widthPercent="50%"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -41,6 +41,16 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/price"
                 android:text="Price"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/description"
+                android:text="Price"
+                />
+            <ListView android:id="@+id/allergens_list"
+                      android:layout_width="match_parent"
+                      android:layout_height="100dp"
                 />
         </LinearLayout>
     </android.support.percent.PercentRelativeLayout>
