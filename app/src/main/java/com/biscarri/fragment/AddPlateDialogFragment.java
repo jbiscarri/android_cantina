@@ -93,6 +93,7 @@ public class AddPlateDialogFragment extends DialogFragment {
         final AllergensAdapter adapter = new AllergensAdapter(context,
                 mPlate.getAllergenList());
         mAllergens.setAdapter(adapter);
+        mAllergens.setEnabled(false);
 
     }
 

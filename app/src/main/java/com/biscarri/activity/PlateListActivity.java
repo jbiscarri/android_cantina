@@ -87,7 +87,7 @@ public class PlateListActivity extends AppCompatActivity  implements AddPlateDia
             URL url;
             InputStream input = null;
             try {
-                url = new URL("http://www.mocky.io/v2/56048f4214d5de7d0b2a81aa");
+                url = new URL("http://www.mocky.io/v2/56083e899665b98c0269babc");
                 HttpURLConnection con = (HttpURLConnection) (url.openConnection());
                 con.setConnectTimeout(5000);
                 con.connect();

@@ -18,12 +18,12 @@ public class Tables {
 
     public Tables() {
         mTables = new LinkedList<>();
-        mTables.add(new Table(1, "Table 1"));
-        mTables.add(new Table(2, "Table 2"));
-        mTables.add(new Table(3, "Table 3"));
-        mTables.add(new Table(4, "Table 4"));
-        mTables.add(new Table(5, "Table 5"));
-        mTables.add(new Table(6, "Table 6"));
+        mTables.add(new Table(1, "Table 1 - Naboo"));
+        mTables.add(new Table(2, "Table 2 - Tatooine"));
+        mTables.add(new Table(3, "Table 3 - Yavin"));
+        mTables.add(new Table(4, "Table 4 - Coruscant"));
+        mTables.add(new Table(5, "Table 5 - Bespin"));
+        mTables.add(new Table(6, "Table 6 - Dagobah"));
 
     }
 

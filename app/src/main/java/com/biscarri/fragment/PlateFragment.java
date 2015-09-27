@@ -88,6 +88,7 @@ public class PlateFragment extends Fragment {
             return new PlateViewHolder(new PlateView(getActivity()));
         }
 
+
         @Override
         public void onBindViewHolder(PlateViewHolder holder, int position) {
             Plate currentPlate = Plates.getInstance().getPlates().get(position);
@@ -123,7 +124,6 @@ public class PlateFragment extends Fragment {
                         dialog.setPlate(plate);
                         dialog.setAddPlateDialogListener((AddPlateDialogFragment.AddPlateDialogListener) getActivity());
                         dialog.show(getFragmentManager(), null);
-
                     }
                 });
             }

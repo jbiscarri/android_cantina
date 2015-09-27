@@ -6,8 +6,8 @@
               android:layout_height="wrap_content"
               android:paddingTop="2dp">
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
         android:id="@+id/allergen_image"
         android:src="@drawable/gluten"
         />
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/allergen_name"
         android:text="@string/allergen_demo_text"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="4dp"
         />
 
 </LinearLayout>

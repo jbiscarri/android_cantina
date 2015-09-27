@@ -26,6 +26,7 @@ public class Plates {
 
     public Plates() {
         mPlates = new LinkedList<>();
+        /*
 
         Allergens allergens = Allergens.getInstance();
         List<Allergen> allergens1 = new LinkedList<>();
@@ -43,6 +44,7 @@ public class Plates {
         mPlates.add(new Plate(1, "Hamburger", "hamburger", 12.50f, allergens1, "A description"));
         mPlates.add(new Plate(2, "Paella", "paella", 12.50f, allergens2, "A description"));
         mPlates.add(new Plate(3, "Chips", "chips", 12.50f, allergens3, "A description"));
+        */
     }
 
     public List<Plate> getPlates() {

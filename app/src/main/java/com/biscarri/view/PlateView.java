@@ -36,7 +36,6 @@ public class PlateView extends android.support.v7.widget.CardView {
         mContext = context;
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         setLayoutParams(params);
-
     }
 
     public PlateView(Context context, AttributeSet attrs) {
@@ -83,5 +82,8 @@ public class PlateView extends android.support.v7.widget.CardView {
         final AllergensAdapter adapter = new AllergensAdapter(mContext,
                 mPlate.getAllergenList());
         mAllergens.setAdapter(adapter);
+        mAllergens.setEnabled(false);
     }
+
+
 }
